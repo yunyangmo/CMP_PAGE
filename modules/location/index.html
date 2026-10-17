@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="description" content="Drag the point to move a character. It turns toward a fixed flag and approaches it, running when far away and walking when close.">
+  <title>Location motion</title>
+  <link rel="icon" href="assets/flag.png" type="image/png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="demo" aria-label="Interactive character approaching a flag">
+    <div class="world">
+      <div id="projection" class="projection" aria-hidden="true"></div>
+      <div class="target" aria-label="Fixed target at the origin">
+        <img src="assets/flag.png" width="35" height="57" alt="Target flag" draggable="false">
+      </div>
+      <button id="human" class="human" type="button" tabindex="-1" aria-label="Drag the character">
+        <img id="run-sprite" class="sprite" src="assets/run.png" width="87" height="63" alt="Running character" draggable="false">
+        <img id="walk-sprite" class="sprite" src="assets/walk.png" width="46" height="62" alt="Walking character" draggable="false" hidden>
+      </button>
+    </div>
+    <div id="rail" class="rail">
+      <div class="axis-line" aria-hidden="true"></div>
+      <div class="origin" aria-hidden="true"></div>
+      <button id="position-handle" class="position-handle" type="button" role="slider"
+        aria-label="Character position" aria-valuemin="-8" aria-valuemax="8" aria-valuenow="6">
+        <span class="point" aria-hidden="true"></span>
+      </button>
+    </div>
+    <p id="announcement" class="sr-only" aria-live="polite"></p>
+    <p id="error" class="sr-only" role="alert" hidden></p>
+  </main>
+  <script>
+    window.LOCATION_MOTION_CONFIG = {
+      minPosition: -8,
+      maxPosition: 8,
+      initialPosition: 6,
+      nearDistance: 2,
+      runSpeed: 1.5,
+      walkSpeed: 0.6,
+      keyboardStep: 0.25,
+      turnSeconds: 0.26,
+      spriteBaseDirection: -1
+    };
+  </script>
+  <script src="motion.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
